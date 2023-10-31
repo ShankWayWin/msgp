@@ -10,7 +10,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/tinylib/msgp/gen"
+	"github.com/ShankWayWin/msgp/gen"
 )
 
 // A FileSet is the in-memory representation of a
@@ -329,10 +329,14 @@ func (fs *FileSet) getField(f *ast.Field) []gen.StructField {
 	var extension, flatten bool
 	// parse tag; otherwise field name is field tag
 	if f.Tag != nil {
-		body := reflect.StructTag(strings.Trim(f.Tag.Value, "`")).Get("msg")
+		body := reflect.StructTag(strings.Trim(f.Tag.Value, "`")).Get("json")
 		if body == "" {
-			body = reflect.StructTag(strings.Trim(f.Tag.Value, "`")).Get("msgpack")
+			body = reflect.StructTag(strings.Trim(f.Tag.Value, "`")).Get("msg")
+			if body == "" {
+				body = reflect.StructTag(strings.Trim(f.Tag.Value, "`")).Get("msgpack")
+			}
 		}
+
 		tags := strings.Split(body, ",")
 		if len(tags) >= 2 {
 			switch tags[1] {

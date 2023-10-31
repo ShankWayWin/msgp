@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tinylib/msgp/msgp"
+	"github.com/ShankWayWin/msgp/msgp"
 )
 
 // benchmark encoding a small, "fast" type.

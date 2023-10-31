@@ -38,13 +38,15 @@ func (m Method) String() string {
 		return "marshal"
 	case Unmarshal:
 		return "unmarshal"
+	case UnmarshalJsonOrMsg:
+		return "unmarshalJsonOrMsg"
 	case Size:
 		return "size"
 	case Test:
 		return "test"
 	default:
 		// return e.g. "decode+encode+test"
-		modes := [...]Method{Decode, Encode, Marshal, Unmarshal, Size, Test}
+		modes := [...]Method{Decode, Encode, Marshal, Unmarshal, UnmarshalJsonOrMsg, Size, Test}
 		any := false
 		nm := ""
 		for _, mm := range modes {
@@ -63,15 +65,17 @@ func (m Method) String() string {
 }
 
 const (
-	Decode      Method                       = 1 << iota // msgp.Decodable
-	Encode                                               // msgp.Encodable
-	Marshal                                              // msgp.Marshaler
-	Unmarshal                                            // msgp.Unmarshaler
-	Size                                                 // msgp.Sizer
-	Test                                                 // generate tests
-	invalidmeth                                          // this isn't a method
-	encodetest  = Encode | Decode | Test                 // tests for Encodable and Decodable
-	marshaltest = Marshal | Unmarshal | Test             // tests for Marshaler and Unmarshaler
+	Decode             Method                       = 1 << iota // msgp.Decodable
+	Encode                                                      // msgp.Encodable
+	Marshal                                                     // msgp.Marshaler
+	Unmarshal                                                   // msgp.Unmarshaler
+	Size                                                        // msgp.Sizer
+	Test                                                        // generate tests
+	UnmarshalJsonOrMsg                                          // 自動解析Json或MSG
+	invalidmeth                                                 // this isn't a method
+	encodetest         = Encode | Decode | Test                 // tests for Encodable and Decodable
+	marshaltest        = Marshal | Unmarshal | Test             // tests for Marshaler and Unmarshaler
+	// tests for Marshaler and Unmarshaler
 )
 
 type Printer struct {
@@ -94,6 +98,9 @@ func NewPrinter(m Method, out io.Writer, tests io.Writer) *Printer {
 	}
 	if m.isset(Unmarshal) {
 		gens = append(gens, unmarshal(out))
+	}
+	if m.isset(UnmarshalJsonOrMsg) {
+		gens = append(gens, marshalJsonOrMsg(out))
 	}
 	if m.isset(Size) {
 		gens = append(gens, sizes(out))

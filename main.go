@@ -28,9 +28,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/tinylib/msgp/gen"
-	"github.com/tinylib/msgp/parse"
-	"github.com/tinylib/msgp/printer"
+	"github.com/ShankWayWin/msgp/gen"
+	"github.com/ShankWayWin/msgp/parse"
+	"github.com/ShankWayWin/msgp/printer"
 )
 
 var (
@@ -92,6 +92,7 @@ func main() {
 	if err := Run(*file, mode, *unexported); err != nil {
 		exitln(err.Error())
 	}
+
 }
 
 // Run writes all methods using the associated file or path, e.g.

@@ -7,8 +7,8 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/tinylib/msgp/gen"
-	"github.com/tinylib/msgp/parse"
+	"github.com/ShankWayWin/msgp/gen"
+	"github.com/ShankWayWin/msgp/parse"
 	"golang.org/x/tools/imports"
 )
 

@@ -1,7 +1,7 @@
 package _generated
 
 import (
-	"github.com/tinylib/msgp/msgp"
+	"github.com/ShankWayWin/msgp/msgp"
 )
 
 // this has "external" types that will show up

@@ -11,7 +11,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/tinylib/msgp/msgp"
+	"github.com/ShankWayWin/msgp/msgp"
 )
 
 type rawBytes []byte
