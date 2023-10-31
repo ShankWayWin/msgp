@@ -37,7 +37,7 @@ func (u *marshalJsonMsgGen) Execute(p Elem) error {
 
 	u.p.comment("自動解析Json或MSG")
 	u.p.printf("\nfunc (%s %s) UnmarshalJsonOrMsg(bts []byte) (o []byte, err error) {", p.Varname(), methodReceiver(p))
-	u.p.printf("\n	_,msgErr := %s.UnmarshalMsg(b)", p.Varname())
+	u.p.printf("\n	_,msgErr := %s.UnmarshalMsg(bts)", p.Varname())
 	u.p.printf("\n 	if msgErr != nil {")
 	u.p.printf("\n 		var json = jsoniter.ConfigCompatibleWithStandardLibrary")
 	u.p.printf("\n 		jErr := json.Unmarshal(bts, z)")

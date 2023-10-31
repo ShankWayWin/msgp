@@ -82,7 +82,7 @@ func generate(f *parse.FileSet, mode gen.Method) (*bytes.Buffer, *bytes.Buffer, 
 	outbuf := bytes.NewBuffer(make([]byte, 0, 4096))
 	writePkgHeader(outbuf, f.Package)
 
-	myImports := []string{"github.com/ShankWayWin/msgp", "jsoniter \"github.com/json-iterator/go\""}
+	myImports := []string{"github.com/ShankWayWin/msgp/msgp", "jsoniter \"github.com/json-iterator/go\""}
 	for _, imp := range f.Imports {
 		if imp.Name != nil {
 			// have an alias, include it.
