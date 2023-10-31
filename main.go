@@ -18,7 +18,7 @@
 //	-marshal = satisfy the `msgp.Marshaler` and `msgp.Unmarshaler` interfaces (default is true)
 //	-tests = generate tests and benchmarks (default is true)
 //
-// For more information, please read README.md, and the wiki at github.com/tinylib/msgp
+// For more information, please read README.md, and the wiki at github.com/ShankWayWin/msgp
 package main
 
 import (
@@ -79,7 +79,7 @@ func main() {
 		mode |= (gen.Encode | gen.Decode | gen.Size)
 	}
 	if *marshal {
-		mode |= (gen.Marshal | gen.Unmarshal | gen.Size)
+		mode |= (gen.Marshal | gen.Unmarshal | gen.Size | gen.UnmarshalJsonOrMsg)
 	}
 	if *tests {
 		mode |= gen.Test
